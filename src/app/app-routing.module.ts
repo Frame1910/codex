@@ -3,10 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { ShellComponent } from './shell/shell.component';
+import { TaxCheckComponent } from './tax-check/tax-check.component';
 
 const routes: Routes = [
-  { path: '', component: ShellComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent }
+  {
+    path: '', component: ShellComponent, canActivate: [AuthGuard], children: [
+      { path: 'tax-check', component: TaxCheckComponent },
+    ]
+  },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

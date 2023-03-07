@@ -1,1 +1,110 @@
-<p>tax-check works!</p>
+<main class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title><h1>Check deductions:</h1></mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <section class="card-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Income</mat-label>
+          <input
+            matInput
+            type="number"
+            [formControl]="salary"
+            placeholder="e.g. 66000"
+          />
+          <mat-icon matSuffix>attach_money</mat-icon>
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]="hecs"
+          >Do you have student loan repayments?</mat-checkbox
+        >
+        <mat-checkbox [(ngModel)]="medicareLevy"
+          >Do you pay the Medicare Levy?</mat-checkbox
+        >
+        <ng-container *ngIf="salary.valueChanges | async as salaryNumber">
+          <ng-container *ngIf="salaryNumber > 0">
+            <p>Income tax:</p>
+            <p class="expense-colors">
+              -{{ calculateIncomeTax(salaryNumber) | currency }}
+            </p>
+          </ng-container>
+          <ng-container *ngIf="medicareLevy">
+            <p>Medicare Levy:</p>
+            <p class="expense-colors">
+              -{{ calculateMedicareLevy(salaryNumber) | currency }}
+            </p>
+          </ng-container>
+          <ng-container *ngIf="hecs">
+            <p>HECS Loan Repayments:</p>
+            <p class="expense-colors">
+              -{{ calculateHecsRepayment(salaryNumber) | currency }}
+            </p>
+          </ng-container>
+          <mat-divider></mat-divider>
+        </ng-container>
+      </section>
+    </mat-card-content>
+    <mat-card-actions *ngIf="salary.valueChanges | async as salaryNumber">
+      <div style="flex-direction: column">
+        <p style="margin: 0px">Final Pay in Bank:</p>
+        <section
+          style="
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            align-items: center;
+          "
+        >
+          <h2
+            class="income-colors"
+            style="cursor: pointer; width: min-content"
+            matTooltip="Copy to clipboard"
+            [cdkCopyToClipboard]="
+              (
+                salaryNumber -
+                calculateTotalTax(salaryNumber, hecs, medicareLevy)
+              ).toString()
+            "
+            (click)="openSnackbar()"
+          >
+            {{
+              salaryNumber - calculateTotalTax(salaryNumber, hecs, medicareLevy)
+                | currency
+            }}
+          </h2>
+          <p>/year</p>
+        </section>
+        <p style="margin: 0px">or</p>
+        <section
+          style="
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            align-items: center;
+          "
+        >
+          <h3
+            class="income-colors"
+            style="cursor: pointer; width: min-content"
+            matTooltip="Copy to clipboard"
+            [cdkCopyToClipboard]="
+              (
+                salaryNumber -
+                calculateTotalTax(salaryNumber, hecs, medicareLevy)
+              ).toString()
+            "
+            (click)="openSnackbar()"
+          >
+            {{
+              (salaryNumber -
+                calculateTotalTax(salaryNumber, hecs, medicareLevy)) /
+                12 | currency
+            }}
+          </h3>
+          <p>/month</p>
+        </section>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</main>

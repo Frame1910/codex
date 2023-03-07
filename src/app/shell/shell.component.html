@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" *ngIf="user$ | async as user">
+<mat-toolbar color="primary" *ngIf="user$ | async as user" class="toolbar">
   <button mat-icon-button>
     <mat-icon>menu</mat-icon>
   </button>
@@ -13,6 +13,6 @@
   </button>
 </mat-toolbar>
 
-<main style="margin: 15px">
-  <app-tax-check></app-tax-check>
+<main style="margin: 15px; height: calc(100vh - 64px)">
+  <router-outlet></router-outlet>
 </main>
