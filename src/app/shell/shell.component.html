@@ -1,1 +1,18 @@
-<p>shell works!</p>
+<mat-toolbar color="primary" *ngIf="user$ | async as user">
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Budget Codex</span>
+  <span style="flex: 1 1 auto"></span>
+  <button mat-button>
+    <mat-icon>person</mat-icon>
+    {{ user.user.email }}
+  </button>
+  <button mat-icon-button (click)="supabase.signout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<main style="margin: 15px">
+  <app-tax-check></app-tax-check>
+</main>

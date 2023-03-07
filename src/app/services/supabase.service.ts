@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SupabaseClient, createClient, AuthError, PostgrestError } from '@supabase/supabase-js';
+import { SupabaseClient, createClient, AuthError, PostgrestError, User } from '@supabase/supabase-js';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -31,10 +31,11 @@ export class SupabaseService {
 
   async getUser() {
     const { data, error } = await this.supabase.auth.getUser();
-    return this._errorHandler(data, error);
+    return this._errorHandler(data, error) as { user: User }
   }
 
   async signout() {
     const { error } = await this.supabase.auth.signOut()
+    location.reload()
   }
 }

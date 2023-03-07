@@ -31,12 +31,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { ShellComponent } from './shell/shell.component';
+import { TaxCheckComponent } from './tax-check/tax-check.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ShellComponent
+    ShellComponent,
+    TaxCheckComponent
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,6 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> {
     const user = await this.supabase.getUser();
-    console.log(user);
     if (user) {
       return true
     } else {
