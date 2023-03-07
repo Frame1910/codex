@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "budget-3ec5f": {
+      "hosting": {
+        "codex": [
+          "budget-3ec5f"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "budget-3ec5f"
+  }
+}
