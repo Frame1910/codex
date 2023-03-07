@@ -6,7 +6,7 @@
 
     <mat-card-content>
       <section class="card-container">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>Income</mat-label>
           <input
             matInput
@@ -90,8 +90,9 @@
             matTooltip="Copy to clipboard"
             [cdkCopyToClipboard]="
               (
-                salaryNumber -
-                calculateTotalTax(salaryNumber, hecs, medicareLevy)
+                (salaryNumber -
+                  calculateTotalTax(salaryNumber, hecs, medicareLevy)) /
+                12
               ).toString()
             "
             (click)="openSnackbar()"
