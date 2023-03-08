@@ -7,7 +7,7 @@ import { TaxCheckComponent } from './tax-check/tax-check.component';
 
 const routes: Routes = [
   {
-    path: '', component: ShellComponent, canActivate: [AuthGuard], children: [
+    path: '', component: ShellComponent, children: [
       { path: 'tax-check', component: TaxCheckComponent },
     ]
   },
